@@ -27,7 +27,7 @@ resource "aws_instance" "server" {
       host = self.public_ip
       user = "ec2-user"
       private_key = var.private_key
-      timeout = 4s
+      timeout = "4s"
     }
     tags = {
       "name" = "DeployVM"
