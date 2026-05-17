@@ -95,7 +95,7 @@ jobs:
             sudo systemctl start docker
             sudo systemctl enable docker
             sudo usermod -aG docker ec2-user
-            sudo $(aws ecr get-login --no-include-email --region eu-north-1)
+            aws ecr get-login-password --region eu-north-1 | sudo docker login --username AWS --password-stdin $REGISTRY
             sudo docker stop mycontainer|| true
             sudo docker rm mycontainer|| true
             sudo docker pull $REGISTRY/$REPOSITORY:$IMAGE_TAG
