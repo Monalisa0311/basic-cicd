@@ -14,6 +14,10 @@ terraform {
 provider "aws" {
   region = var.region
 }
+resource "aws_ecr_repository" "app_repo" {
+  name = "example-node-app"
+}
+
 resource "aws_instance" "server" {
   ami = "ami-059f32cf6eecf0ef9"  #free tier
 #   ami = "ami-05d62b9bc5a6ca605"  #for video same change this 
