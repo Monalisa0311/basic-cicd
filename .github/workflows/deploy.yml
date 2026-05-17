@@ -6,7 +6,7 @@ on:
 
 env:
   AWS_ACCESS_KEY_ID : ${{ secrets.AWS_ACCESS_KEY_ID }}
-  AWS_ACCESS_SECRET_KEY : ${{ secrets.AWS_ACCESS_SECRET_KEY }}
+  AWS_SECRET_ACCESS_KEY : ${{ secrets.AWS_ACCESS_SECRET_KEY }}
   AWS_TF_STATE_BUCKET_NAME : ${{ secrets.AWS_TF_STATE_BUCKET_NAME }}
   AWS_SSH_KEY_PRIVATE : ${{ secrets.AWS_SSH_KEY_PRIVATE }}
   AWS_SSH_KEY_PUBLIC : ${{ secrets.AWS_SSH_KEY_PUBLIC }}
@@ -24,7 +24,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_ACCESS_SECRET_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
       - name : Setup terraform
         uses : hashicorp/setup-terraform@v3
@@ -63,7 +63,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_ACCESS_SECRET_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
       - name: login to AWS ECR
         id: login-ecr
@@ -87,7 +87,7 @@ jobs:
           host: ${{env.SERVER_PUBLIC_IP}}
           username: ec2-user
           key: ${{env.AWS_SSH_KEY_PRIVATE}}
-          envs: AWS_SSH_KEY_PRIVATE, REPOSITORY, REGISTRY, IMAGE_TAG, AWS_ACCESS_KEY_ID, AWS_ACCESS_SECRET_KEY,AWS_REGION, AWS_DEFAULT_REGION
+          envs: AWS_SSH_KEY_PRIVATE, REPOSITORY, REGISTRY, IMAGE_TAG, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY,AWS_REGION, AWS_DEFAULT_REGION
           script: |-
             sudo yum update -y
             sudo yum install docker -y
